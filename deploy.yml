@@ -71,10 +71,10 @@
         image: "{{ aim_centos7 }}"
         wait: yes
         wait_timeout: 600
-        volumes:
-          - device_name: /dev/sda1
-            volume_type: gp2
-            volume_size: 20
+   #     volumes:
+   #       - device_name: /dev/sda1
+   #         volume_type: gp2
+   #         volume_size: 20
         count: 1
         vpc_subnet_id: "{{ subnet }}"
         assign_public_ip: yes
