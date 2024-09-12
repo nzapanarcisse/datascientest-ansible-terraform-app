@@ -61,7 +61,7 @@
             to_port: 80
             cidr_ip: 0.0.0.0/0
         rules_egress:
-          - proto: all
+          - proto: tcp
             cidr_ip: 0.0.0.0/0
     - name: Deploy Production Server
       ec2:
@@ -120,10 +120,10 @@
 
     - name: Afficher le résultat de la vérification
       debug:
-        msg: "Accès à Internet : {{ internet_access.elapsed }} secondes"
-#    - name: Install EPEL repo
-#      package: name=epel-release state=present
-#      when: ansible_distribution == "CentOS"
+        msg: "Accès à Internet : {{internet_access.elapsed | default('Échec de la connexion')}} secondes"
+    - name: Install EPEL repo
+      package: name=epel-release state=present
+      when: ansible_distribution == "CentOS"
     - name: download pip script
       get_url:
         url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
