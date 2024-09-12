@@ -112,8 +112,13 @@
     - group_vars/all.yml
   pre_tasks:
     - name: Install EPEL repo
-      package: name=epel-release state=present
+      package:
+        name: epel-release
+        state: present
       when: ansible_distribution == "CentOS"
+#    - name: Install EPEL repo
+#      package: name=epel-release state=present
+#      when: ansible_distribution == "CentOS"
     - name: download pip script
       get_url:
         url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
