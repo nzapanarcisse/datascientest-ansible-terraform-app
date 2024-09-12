@@ -111,11 +111,16 @@
   vars_files:
     - group_vars/all.yml
   pre_tasks:
-    - name: Install EPEL repo
-      yum:
-        name: epel-release
-        state: present
-      when: ansible_distribution == "CentOS"
+    - name: Vérifier l'accès à Internet
+      wait_for:
+        host: google.com
+        port: 443
+        timeout: 5
+      register: internet_access
+
+    - name: Afficher le résultat de la vérification
+      debug:
+        msg: "Accès à Internet : {{ internet_access.elapsed }} secondes"
 #    - name: Install EPEL repo
 #      package: name=epel-release state=present
 #      when: ansible_distribution == "CentOS"
