@@ -111,11 +111,12 @@
   vars_files:
     - group_vars/all.yml
   pre_tasks:
-    - name: Install EPEL repo
-      package:
-        name: epel-release
-        state: present
-      when: ansible_distribution == "CentOS"
+    pre_tasks:
+      - name: Install EPEL repo
+        yum:
+          name: epel-release
+          state: present
+        when: ansible_distribution == "CentOS"
 #    - name: Install EPEL repo
 #      package: name=epel-release state=present
 #      when: ansible_distribution == "CentOS"
