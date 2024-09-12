@@ -107,20 +107,10 @@
 - name: Apache installation using docker
   hosts: "{{ host_group_name }}"
   become: true
-  remote_user: centos
+  remote_user: ec2-user
   vars_files:
     - group_vars/all.yml
   pre_tasks:
-    - name: Vérifier l'accès à Internet
-      wait_for:
-        host: google.com
-        port: 443
-        timeout: 5
-      register: internet_access
-
-    - name: Afficher le résultat de la vérification
-      debug:
-        msg: "Accès à Internet : {{internet_access.elapsed | default('Échec de la connexion')}} secondes"
     - name: Install EPEL repo
       package: name=epel-release state=present
       when: ansible_distribution == "CentOS"
