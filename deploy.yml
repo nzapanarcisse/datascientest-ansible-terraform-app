@@ -111,8 +111,7 @@
   vars_files:
     - group_vars/all.yml
   pre_tasks:
-    pre_tasks:
-      - name: Install EPEL repo
+    - name: Install EPEL repo
         yum:
           name: epel-release
           state: present
